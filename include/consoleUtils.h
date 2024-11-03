@@ -80,4 +80,14 @@ void setTitle(std::string title)
     std::cout << "\033]0;" << title << "\007";
 }
 
+std::string toUpper(std::string str)
+{
+    for (int i = 0; i < str.length(); i++)
+    {
+        str[i] = toupper(str[i]);
+    }
+
+    return str;
+}
+
 #endif
