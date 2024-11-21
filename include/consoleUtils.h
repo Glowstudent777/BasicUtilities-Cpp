@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <sstream>
 #include <limits>
+#include <functional>
 
 enum class Alignment
 {
@@ -88,6 +89,52 @@ std::string toUpper(std::string str)
     }
 
     return str;
+}
+
+void getInt_Menu(int &input, int menu, void (*func)(int), int min = '\0', int max = '\0', std::string cmessage = "", bool clearOnFail = false)
+{
+    if (cmessage != "")
+    {
+        std::cout << cmessage;
+    }
+    else
+    {
+        std::cout << "Enter your choice: ";
+    }
+    std::cin >> input;
+
+    while (std::cin.fail() || ((min == max && max == '\0') ? false : (input < min || input > max)))
+    {
+        if (clearOnFail == true)
+        {
+            clearScreen();
+            func(menu);
+        }
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Invalid Input. Please enter a valid input: ";
+        std::cin >> input;
+    }
+}
+
+void getInt(int &input, std::string cmessage = "", int min = '\0', int max = '\0')
+{
+    if (cmessage != "")
+    {
+        std::cout << cmessage;
+    }
+    else
+    {
+        std::cout << "Enter your choice: ";
+    }
+    std::cin >> input;
+
+    while (std::cin.fail() || ((min == '\0' && max == min) ? false : (input < min || input > max)))
+    {
+        resetInput();
+        std::cout << "Invalid Input. Please enter a valid input: ";
+        std::cin >> input;
+    }
 }
 
 #endif
