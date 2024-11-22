@@ -6,6 +6,7 @@
 #include <sstream>
 #include <limits>
 #include <functional>
+#include <random>
 
 enum class Alignment
 {
@@ -76,6 +77,19 @@ std::string format_currency(float amount)
     return formatted;
 }
 
+std::string stringPrecision(double doubleValue, int precision)
+{
+    std::stringstream stream;
+    stream << std::fixed << std::setprecision(precision) << doubleValue;
+    std::string formatted = stream.str();
+    return formatted;
+}
+
+std::string append_string(std::string str1, std::string str2, char delim = '\0')
+{
+    return str1 + str2;
+}
+
 void setTitle(std::string title)
 {
     std::cout << "\033]0;" << title << "\007";
@@ -135,6 +149,67 @@ void getInt(int &input, std::string cmessage = "", int min = '\0', int max = '\0
         std::cout << "Invalid Input. Please enter a valid input: ";
         std::cin >> input;
     }
+}
+
+void randomInt(int &var, int min = 1, int max = 100)
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> dis(min, max);
+
+    var = floorf(dis(gen) * 100) / 100;
+}
+
+void normalizeString(std::string &str)
+{
+    std::string temp;
+    bool first = true;
+
+    for (int i = 0; i < str.length(); i++)
+    {
+        if ((str[i + 1] == ' ' && str[i] == ' ') || (first && str[i] == ' ') || (!str[i + 1] && str[i] == ' '))
+            continue;
+
+        temp += str[i];
+        first = false;
+    }
+
+    str = temp;
+}
+
+void emptyBuffer()
+{
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+
+template <typename T>
+void emptyVector(std::vector<T> &vec)
+{
+    vec.clear();
+    vec.shrink_to_fit();
+}
+
+std::vector<std::string> splitString(std::string str, char dilem = ',')
+{
+    std::vector<std::string> vec;
+    std::string temp;
+
+    for (int i = 0; i < str.length(); i++)
+    {
+        if (str[i] == dilem)
+        {
+            vec.push_back(temp);
+            temp = "";
+        }
+        else
+        {
+            temp += str[i];
+        }
+    }
+
+    vec.push_back(temp);
+
+    return vec;
 }
 
 #endif
