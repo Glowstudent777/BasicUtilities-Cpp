@@ -2,9 +2,9 @@
 #define SEARCHALGS_H
 
 template <typename T>
-int binarySearch(T arr[], int index, T value)
+int binarySearch(const T arr[], int size, T value)
 {
-    int first = 0, last = numElems - 1, middle;
+    int first = 0, last = size - 1, middle;
 
     while (first <= last)
     {
@@ -18,6 +18,18 @@ int binarySearch(T arr[], int index, T value)
 
         else
             first = middle + 1;
+    }
+
+    return -1;
+}
+
+template <typename T>
+int linearSearch(const T arr[], int size, T value)
+{
+    for (int i = 0; i <= size; i++)
+    {
+        if (arr[i] == value)
+            return i;
     }
 
     return -1;
