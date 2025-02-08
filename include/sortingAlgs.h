@@ -4,7 +4,7 @@
 enum class SortOrder
 {
     Ascending,
-    escending
+    Descending
 };
 
 template <typename T>
@@ -24,12 +24,12 @@ void bubbleSort(T arr[], int size, SortOrder order = SortOrder::Ascending)
     {
         for (index = 0; index < maxElement; index++)
         {
-            bool swap = (order == SortOrder::Ascending)
-                            ? (arr[i] > arr[index + 1])
-                            : (arr[index] < arr[index + 1]);
+            bool swapE = (order == SortOrder::Ascending)
+                             ? (arr[index] > arr[index + 1])
+                             : (arr[index] < arr[index + 1]);
 
-            if (swap)
-                swap(arr[index], arr[index + 1])
+            if (swapE)
+                swap(arr[index], arr[index + 1]);
         };
     }
 }
@@ -43,11 +43,11 @@ void selectionSort(T arr[], int size, SortOrder order = SortOrder::Ascending)
 
         for (int i = start + 1; i < size; i++)
         {
-            bool swap = (order == SortOrder::Ascending)
-                            ? (arr[i] > arr[selIndex])
-                            : (arr[i] < arr[selIndex]);
+            bool swapE = (order == SortOrder::Ascending)
+                             ? (arr[i] < arr[selIndex])
+                             : (arr[i] > arr[selIndex]);
 
-            if (swap)
+            if (swapE)
                 selIndex = i;
         }
         if (selIndex != start)
