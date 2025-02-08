@@ -1,6 +1,6 @@
-# Console Utils in C++
+# Basic Utilities for C++
 
-This is a simple header file that provides some utility functions for my console applications in C++.
+These are simple header files that provides some basic utility functions for my C++ projects.
 
 ## Installation
 
