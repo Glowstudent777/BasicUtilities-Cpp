@@ -1,6 +1,8 @@
 #ifndef SORTINGALGS_H
 #define SORTINGALGS_H
 
+#include <vector>
+
 enum class SortOrder
 {
     Ascending,
@@ -52,6 +54,27 @@ void selectionSort(T arr[], int size, SortOrder order = SortOrder::Ascending)
         }
         if (selIndex != start)
             swap(arr[start], arr[selIndex]);
+    }
+}
+
+template <typename T>
+void selectionSort(std::vector<T> &v, SortOrder order = SortOrder::Ascending)
+{
+    for (int start = 0; start < (v.size() - 1); start++)
+    {
+        int selIndex = start;
+
+        for (int i = start + 1; i < (v.size()); i++)
+        {
+            bool swapE = (order == SortOrder::Ascending)
+                             ? (v[i] < v[selIndex])
+                             : (v[i] > v[selIndex]);
+
+            if (swapE)
+                selIndex = i;
+        }
+        if (selIndex != start)
+            swap(v[start], v[selIndex]);
     }
 }
 
